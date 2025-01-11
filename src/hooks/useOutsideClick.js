@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { setActive } from "./useScrollEffect";
 
 export default function useOutsideClick(handler, listenCapturing = true) {
   const ref = useRef();
@@ -8,8 +9,10 @@ export default function useOutsideClick(handler, listenCapturing = true) {
       function handleClick(e) {
         if (ref.current && !ref.current.contains(e.target)) {
           handler();
+          setActive(false);
         }
       }
+
 
       document.addEventListener("click", handleClick, listenCapturing);
 

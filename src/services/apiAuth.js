@@ -18,6 +18,8 @@ const { data, error } = await supabase.auth.signInWithPassword({
     password,
   })
 
+ 
+
 if (error) throw new Error(error.message);
 
 

@@ -16,6 +16,9 @@ import Booking from "./pages/Booking";
 import Checkin from "./pages/Checkin";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import { DarkModeProvider } from "./context/DarkModeContext";
+import useScrollEffect from "./hooks/useScrollEffect";
+
+
 
 //framer.com
 
@@ -27,7 +30,12 @@ const queryClient=new QueryClient({
   }
 })
 
+
+
 function App(){
+ 
+
+  // useScrollEffect();
   return(<DarkModeProvider> 
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false}/>

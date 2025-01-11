@@ -3,6 +3,9 @@ import { createPortal } from "react-dom";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import styled from "styled-components";
 import useOutsideClick  from "../hooks/useOutsideClick";
+import useScrollEffect from "../hooks/useScrollEffect";
+import {setActive} from "../hooks/useScrollEffect";
+
 
 const Menu = styled.div`
   display: flex;
@@ -65,6 +68,9 @@ const StyledButton = styled.button`
   }
 `;
 
+let isOpen=false;
+let element;
+
 const MenusContext = createContext();
 
 function Menus({ children }) {
@@ -82,10 +88,14 @@ function Menus({ children }) {
     </MenusContext.Provider>
   );
 }
-
+ 
 function Toggle({ id }) {
-  const { openId, close, open, setPosition } = useContext(MenusContext);
+  const { openId, close, open, setPosition ,position} = useContext(MenusContext);
+  useScrollEffect(isOpen,setPosition,element);
+ 
+  
 
+   
   function handleClick(e) {
     e.stopPropagation();
 
@@ -95,7 +105,11 @@ function Toggle({ id }) {
       y: rect.y + rect.height + 8,
     });
 
-    openId === "" || openId !== id ? open(id) : close();
+    openId === "" || openId !== id ? (open(id),setActive(true)) : (close(),setActive(false));
+    
+    isOpen=!isOpen?true:false;
+    element=e.target.closest("button");
+
   }
 
   return (
@@ -108,6 +122,7 @@ function Toggle({ id }) {
 function List({ id, children }) {
   const { openId, position, close } = useContext(MenusContext);
   const ref = useOutsideClick(close, false);
+
 
   if (openId !== id) return null;
 

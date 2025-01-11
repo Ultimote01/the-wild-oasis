@@ -4,6 +4,29 @@ import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
 import useOutsideclick from "../hooks/useOutsideClick";
 
+
+/*
+Media query example 
+const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;*/
+
+
+/*// Create the keyframes
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;*/ 
+
 const StyledModal = styled.div`
   position: fixed;
   top: 50%;
